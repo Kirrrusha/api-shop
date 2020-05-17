@@ -1,12 +1,30 @@
 import { Module } from '@nestjs/common';
-import { UserController } from './user/user.controller';
-import { AuthController } from './auth/auth.controller';
-import { UserService } from './user/user.service';
-import { AuthService } from './auth/auth.service';
+import { MongooseModule } from '@nestjs/mongoose';
+
+import { configModule } from './configure.root';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { TokenModule } from './token/token.module';
+import { MailModule } from './mail/mail.module';
+
+const environment = process.env.NODE_ENV || 'development';
+
 
 @Module({
-  imports: [],
-  controllers: [UserController, AuthController],
-  providers: [UserService, AuthService],
+  imports: [
+    UserModule,
+    AuthModule,
+    configModule,
+    MongooseModule.forRoot(
+      process.env.MONGODB_WRITE_CONNECTION_STRING,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false
+      }
+    ),
+    TokenModule,
+    MailModule,
+  ],
 })
 export class AppModule {}
