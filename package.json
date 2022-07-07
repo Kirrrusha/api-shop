@@ -38,7 +38,7 @@
     "handlebars": "^4.7.6",
     "lodash": "^4.17.15",
     "mailgun-js": "^0.22.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mongoose": "^5.8.7",
     "nodemailer": "^6.4.6",
     "passport": "^0.4.1",
